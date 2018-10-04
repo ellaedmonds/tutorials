@@ -1,0 +1,6 @@
+a = 3
+b = 55
+if a == 3 or b == 4:
+    print("yes")
+else:
+    print("no")
