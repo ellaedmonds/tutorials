@@ -122,6 +122,51 @@ class bottom(Sprite):
         super().__init__(bottom.poly,position)
         self.vx = 0
         self.vy = 0
+        
+class Person2(Sprite):
+    blue = Color(0x0000CF, .5)
+    side = LineStyle(1,blue)
+    poly = RectangleAsset(10,10, side, blue)
+    def __init__(self,position):
+        super().__init__(Person.poly,position)
+        self.vx = 0
+        self.vy = 0
+        
+class Sideleft2(Sprite):
+    blue = Color(0x0000CF, .5)
+    side = LineStyle(1,blue)
+    poly = RectangleAsset(1,8, side, blue)
+    def __init__(self,position):
+        super().__init__(Sideleft.poly,position)
+        self.vx = 0
+        self.vy = 0
+
+class Sideright2(Sprite):
+    blue = Color(0x0000CF, .5)
+    side = LineStyle(1,blue)
+    poly = RectangleAsset(1,8, side, blue)
+    def __init__(self,position):
+        super().__init__(Sideright.poly,position)
+        self.vx = 0
+        self.vy = 0
+
+class Top2(Sprite):
+    blue = Color(0x0000CF, .5)
+    side = LineStyle(1,blue)
+    poly = RectangleAsset(8,1, side, blue)
+    def __init__(self,position):
+        super().__init__(Top.poly,position)
+        self.vx = 0
+        self.vy = 0
+        
+class bottom2(Sprite):
+    blue = Color(0x0000CF, .5)
+    side = LineStyle(1,blue)
+    poly = RectangleAsset(8,1, side, blue)
+    def __init__(self,position):
+        super().__init__(bottom.poly,position)
+        self.vx = 0
+        self.vy = 0
 
 class finish(Sprite):
     purple = Color(0x380966, .7)
@@ -140,6 +185,7 @@ class Game(App):
         self.gameover = False
         gemgotlist  = []
         self.grounded = False
+        self.grounded2 = False
         self.dead = False
         
         #Game.listenMouseEvent("click",self.block)
@@ -151,6 +197,13 @@ class Game(App):
         Game.listenKeyEvent('keyup', 'up arrow',  self.upstop)
         Game.listenKeyEvent('keydown', 'down arrow',  self.down)
         Game.listenKeyEvent('keyup', 'down arrow',  self.downstop)
+        
+        Game.listenKeyEvent('keydown', 'c',  self.right2)
+        Game.listenKeyEvent('keyup', 'c',  self.rightstop2)
+        Game.listenKeyEvent('keydown', 'x',  self.left2)
+        Game.listenKeyEvent('keyup', 'x',  self.leftstop2)
+        Game.listenKeyEvent('keydown', 'd',  self.up2)
+        Game.listenKeyEvent('keyup', 'd',  self.upstop2)
     
         x=0
         y=0
@@ -301,6 +354,7 @@ class Game(App):
         finish((730,10))
         
         Person((10,450))
+        Person2((30,450))
         Sideleft((10,451))
         Sideright((20,451))
         Top((11,450))
@@ -341,6 +395,32 @@ class Game(App):
     def downstop(self,event):
         for sprite in self.getSpritesbyClass(Person):
             sprite.vy = 0
+    
+    def right2(self,event):
+        for sprite in self.getSpritesbyClass(Person2):
+            sprite.vx = 2
+            
+    def rightstop2(self,event):
+        for sprite in self.getSpritesbyClass(Person2):
+            sprite.vx = 0
+            
+    def left2(self,event):
+        for sprite in self.getSpritesbyClass(Person2):
+            sprite.vx = -2
+            
+    def leftstop2(self,event):
+        for sprite in self.getSpritesbyClass(Person2):
+            sprite.vx = 0
+    
+    def up2(self,event):
+        if self.grounded2 == True: 
+            for sprite in self.getSpritesbyClass(Person2):
+                sprite.vy = -5
+    
+    def upstop2(self,event):
+        for sprite in self.getSpritesbyClass(Person2):
+            sprite.vy = 0
+    
     
     text=Sprite(TextAsset("GEMS:{0}".format(0), width=1000, align='center',style='30px Arial', fill=Color(0x2C2D5E,1)), (760,10))
     gemgot = 0
@@ -393,6 +473,104 @@ class Game(App):
                     else:
                         sprite.vy = 0
                         self.grounded = True
+                
+            for e in self.getSpritesbyClass(bottom):
+                if e.collidingWithSprites(BottomSpike):
+                    sprite.y += 0
+                    sprite.vy = 0
+                    sprite.x += 0
+                    sprite.vx = 0
+                    self.gameover = True
+                    self.dead = True
+                    
+            for f in self.getSpritesbyClass(bottom):
+                if e.collidingWithSprites(Spikes):
+                    sprite.y += 0
+                    sprite.vy = 0
+                    sprite.x += 0
+                    sprite.vx = 0
+                    self.gameover = True
+                    self.dead = True
+                    
+            for f in self.getSpritesbyClass(bottom):
+                if e.collidingWithSprites(finish):
+                    sprite.y += 0
+                    sprite.vy = 0
+                    sprite.x += 0
+                    sprite.vx = 0
+                    self.gameover = True
+                    
+            if sprite.vy > 2.5:
+                sprite.vy=2.5
+                    
+            #for d in self.getSpritesbyClass(bottom):
+             #   if d.collidingWithSprites(Bottom):
+              #      d.vy >= 0
+               #     Sprite.vy >= 0
+                    
+            sprite.x += sprite.vx 
+            sprite.y += sprite.vy
+            
+            for a in self.getSpritesbyClass(Sideleft):
+                a.x = sprite.x
+                a.y = sprite.y+1
+            for b in self.getSpritesbyClass(Sideright):
+                b.x = sprite.x+10
+                b.y = sprite.y+1
+            for c in self.getSpritesbyClass(Top):
+                c.x = sprite.x+1
+                c.y = sprite.y
+            for d in self.getSpritesbyClass(bottom):
+                d.x = sprite.x+1
+                d.y = sprite.y+10
+                
+        for sprite in self.getSpritesbyClass(Person2):
+            #Sprite.vy+=1
+            for gem in self.getSpritesbyClass(Gem)[:]:
+                if gem.collidingWithSprites(Person2):
+                    #print("You get a gem")
+                    self.text.destroy()
+                    self.gemgot += 1
+                    self.text=Sprite(TextAsset("GEMS:{0}".format(self.gemgot), width=1000, align='center',style='30px Arial', fill=Color(0x2C2D5E,1)), (760,50))
+                    gem.destroy()
+                    if self.gemgot == 10:
+                        self.gameover=True
+            
+            for a in self.getSpritesbyClass(Sideright):
+                if a.collidingWithSprites(Block):
+                    sprite.x -= 1
+                    sprite.vx = 0
+                    a.vx = 0
+                    
+            for b in self.getSpritesbyClass(Sideleft):
+                if b.collidingWithSprites(Block):
+                    sprite.x += 1
+                    sprite.vx = 0
+                    b.vx = 0
+                   
+            for c in self.getSpritesbyClass(Top):
+                #print(c.collidingWithSprites(Block))
+                if c.collidingWithSprites(Block):
+                    #print(c.collidingWithSprites(Block))
+                    sprite.y += 1
+                    sprite.vy = 0
+                    c.vy = 0
+            
+            for d in self.getSpritesbyClass(bottom):
+                #print(d.collidingWithSprites(Block))
+                if d.collidingWithSprites(Block) == []:
+                    sprite.vy += .2
+                    self.grounded2 = False
+                else:
+                    if sprite.vy < 0:
+                        sprite.vy = sprite.vy
+                        self.grounded2 = True
+                    #elif sprite.vy > 0:
+                        #sprite.vy = sprite.vy
+                        #self.grounded = True
+                    else:
+                        sprite.vy = 0
+                        self.grounded2 = True
                 
             for e in self.getSpritesbyClass(bottom):
                 if e.collidingWithSprites(BottomSpike):
