@@ -4,17 +4,16 @@
 
 from ggame import App, Color, LineStyle, Sprite, RectangleAsset, CircleAsset, EllipseAsset, PolygonAsset, Frame, TextAsset
 
-print("Use right, left and up arrows to move the player.")
+print("Blue Player: Use right, left and up arrows to move the player.")
+print("Red Player: Use X, C and D arrows to move the player.")
 print()
-print("Try and collect as many gems as possible.")
+print("Try and collect as many gems as possible. The person with the most gems at the end wins!")
 print()
-print("If you land on the pink spikes you die.")
+print("If you land on the pink spikes you die and the other player wins.")
 print()
 print("You can end the game by running into either of the two purple blocks in the top corners.")
 print()
-print("You win the game if you can collect all 10 gems!")
-print()
-print("p.s. if you're frustrated and want to cheat just comment out line 329 :)")
+print("p.s. if you're frustrated and want to cheat just comment out line 329 and  :)")
 
 SCREEN_WIDTH = 1000
 SCREEN_HEIGHT = 800
@@ -187,6 +186,8 @@ class Game(App):
         self.grounded = False
         self.grounded2 = False
         self.dead = False
+        self.reddead = False
+        self.bluedead = False
         
         #Game.listenMouseEvent("click",self.block)
         Game.listenKeyEvent('keydown', 'right arrow',  self.right)
@@ -359,11 +360,11 @@ class Game(App):
         Top((11,450))
         bottom((11,460))
         
-        Person2((30,450))
-        Sideleft2((30,451))
-        Sideright2((40,451))
-        Top2((31,450))
-        bottom2((31,460))
+        Person2((520,450))
+        Sideleft2((520,451))
+        Sideright2((530,451))
+        Top2((521,450))
+        bottom2((521,460))
 
         #print(self.Cells)
     
@@ -489,6 +490,7 @@ class Game(App):
                     sprite.vx = 0
                     self.gameover = True
                     self.dead = True
+                    self.bluedead = True
                     
             for f in self.getSpritesbyClass(bottom):
                 if e.collidingWithSprites(Spikes):
@@ -498,6 +500,7 @@ class Game(App):
                     sprite.vx = 0
                     self.gameover = True
                     self.dead = True
+                    self.bluedead = True
                     
             for f in self.getSpritesbyClass(bottom):
                 if e.collidingWithSprites(finish):
@@ -540,7 +543,7 @@ class Game(App):
                     self.gemgot2 += 1
                     self.text2=Sprite(TextAsset("GEMS:{0}".format(self.gemgot2), width=1000, align='center',style='30px Arial', fill=Color(0x2C2D5E,1)), (760,50))
                     gem.destroy()
-                    if self.gemgot2 == 10:
+                    if self.gemgot2 + self.gemgot == 10:
                         self.gameover = True
             
             for a in self.getSpritesbyClass(Sideright2):
@@ -587,6 +590,7 @@ class Game(App):
                     sprite.vx = 0
                     self.gameover = True
                     self.dead = True
+                    self.reddead = True
                     
             for f in self.getSpritesbyClass(bottom2):
                 if e.collidingWithSprites(Spikes):
@@ -596,6 +600,7 @@ class Game(App):
                     sprite.vx = 0
                     self.gameover = True
                     self.dead = True
+                    self.reddead = True
                     
             for f in self.getSpritesbyClass(bottom2):
                 if e.collidingWithSprites(finish):
@@ -631,7 +636,10 @@ class Game(App):
                 
         if self.gameover:
             if self.dead == True:
-                self.text=Sprite(TextAsset("GAME OVER :(", width=1000, align='center',style='30px Arial', fill=Color(0xff2222,1)), (760,90))
+                if self.reddead == True:
+                    self.text=Sprite(TextAsset("Blue Block Wins!!", width=1000, align='center',style='30px Arial', fill=Color(0xA7A8BC,1)), (760,90))
+                elif self.bluedead == True:
+                    self.text=Sprite(TextAsset("Red Block Wins!!", width=1000, align='center',style='30px Arial', fill=Color(0xA7A8BC,1)), (760,90))
                 myapp.gameover=True
             elif self.gemgot > self.gemgot2:
                 self.text=Sprite(TextAsset("You Ended the Game", width=1000, align='center',style='30px Arial', fill=Color(0x9A9CE5,1)), (760,90))
