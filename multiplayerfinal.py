@@ -428,9 +428,9 @@ class Game(App):
             sprite.vy = 0
     
     
-    text=Sprite(TextAsset("GEMS:{0}".format(0), width=1000, align='center',style='30px Arial', fill=Color(0x2C2D5E,1)), (760,10))
+    text=Sprite(TextAsset("GEMS:{0}".format(0), width=1000, align='center',style='30px Arial', fill=Color(0x0000CF, 1)), (760,10))
     gemgot = 0
-    text2=Sprite(TextAsset("GEMS:{0}".format(0), width=1000, align='center',style='30px Arial', fill=Color(0x2C2D5E,1)), (760,50))
+    text2=Sprite(TextAsset("GEMS:{0}".format(0), width=1000, align='center',style='30px Arial', fill=Color(0xFF5733, 1.0)), (760,50))
     gemgot2 = 0
     def step(self):
         
@@ -441,7 +441,7 @@ class Game(App):
                     #print("You get a gem")
                     self.text.destroy()
                     self.gemgot += 1
-                    self.text=Sprite(TextAsset("GEMS:{0}".format(self.gemgot), width=1000, align='center',style='30px Arial', fill=Color(0x2C2D5E,1)), (760,10))
+                    self.text=Sprite(TextAsset("GEMS:{0}".format(self.gemgot), width=1000, align='center',style='30px Arial', fill=Color(0x0000CF, 1)), (760,10))
                     gem.destroy()
                     if self.gemgot == 10:
                         self.gameover=True
@@ -541,7 +541,7 @@ class Game(App):
                     #print("You get a gem")
                     self.text2.destroy()
                     self.gemgot2 += 1
-                    self.text2=Sprite(TextAsset("GEMS:{0}".format(self.gemgot2), width=1000, align='center',style='30px Arial', fill=Color(0x2C2D5E,1)), (760,50))
+                    self.text2=Sprite(TextAsset("GEMS:{0}".format(self.gemgot2), width=1000, align='center',style='30px Arial', fill=Color(0xFF5733, 1.0)), (760,50))
                     gem.destroy()
                     if self.gemgot2 + self.gemgot == 10:
                         self.gameover = True
@@ -637,17 +637,17 @@ class Game(App):
         if self.gameover:
             if self.dead == True:
                 if self.reddead == True:
-                    self.text=Sprite(TextAsset("Blue Block Wins!!", width=1000, align='center',style='30px Arial', fill=Color(0xA7A8BC,1)), (760,90))
+                    self.text=Sprite(TextAsset("Blue Block Wins!!", width=1000, align='center',style='30px Arial', fill=Color(0x0000CF, 1)), (760,90))
                 elif self.bluedead == True:
-                    self.text=Sprite(TextAsset("Red Block Wins!!", width=1000, align='center',style='30px Arial', fill=Color(0xA7A8BC,1)), (760,90))
+                    self.text=Sprite(TextAsset("Red Block Wins!!", width=1000, align='center',style='30px Arial', fill=Color(0xFF5733, 1.0)), (760,90))
                 myapp.gameover=True
             elif self.gemgot > self.gemgot2:
                 self.text=Sprite(TextAsset("You Ended the Game", width=1000, align='center',style='30px Arial', fill=Color(0x9A9CE5,1)), (760,90))
-                self.text=Sprite(TextAsset("Blue Block Wins!!", width=1000, align='center',style='30px Arial', fill=Color(0xA7A8BC,1)), (760,120))
+                self.text=Sprite(TextAsset("Blue Block Wins!!", width=1000, align='center',style='30px Arial', fill=Color(0x0000CF, 1)), (760,120))
                 myapp.gameover=True
             elif self.gemgot < self.gemgot2:
                 self.text=Sprite(TextAsset("You Ended the Game", width=1000, align='center',style='30px Arial', fill=Color(0x9A9CE5,1)), (760,90))
-                self.text=Sprite(TextAsset("Red Block Wins!!", width=1000, align='center',style='30px Arial', fill=Color(0xA7A8BC,1)), (760,120))
+                self.text=Sprite(TextAsset("Red Block Wins!!", width=1000, align='center',style='30px Arial', fill=Color(0xFF5733, 1.0)), (760,120))
                 myapp.gameover=True
             
 
