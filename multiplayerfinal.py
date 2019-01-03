@@ -124,47 +124,47 @@ class bottom(Sprite):
         self.vy = 0
         
 class Person2(Sprite):
-    blue = Color(0x0000CF, .5)
-    side = LineStyle(1,blue)
-    poly = RectangleAsset(10,10, side, blue)
+    red = Color(0xFF5733, .5)
+    side = LineStyle(1,red)
+    poly = RectangleAsset(10,10, side, red)
     def __init__(self,position):
-        super().__init__(Person.poly,position)
+        super().__init__(Person2.poly,position)
         self.vx = 0
         self.vy = 0
         
 class Sideleft2(Sprite):
-    blue = Color(0x0000CF, .5)
-    side = LineStyle(1,blue)
-    poly = RectangleAsset(1,8, side, blue)
+    red = Color(0xFF5733, .5)
+    side = LineStyle(1,red)
+    poly = RectangleAsset(1,8, side, red)
     def __init__(self,position):
-        super().__init__(Sideleft.poly,position)
+        super().__init__(Sideleft2.poly,position)
         self.vx = 0
         self.vy = 0
 
 class Sideright2(Sprite):
-    blue = Color(0x0000CF, .5)
-    side = LineStyle(1,blue)
-    poly = RectangleAsset(1,8, side, blue)
+    red = Color(0xFF5733, 1.0)
+    side = LineStyle(1,red)
+    poly = RectangleAsset(1,8, side, red)
     def __init__(self,position):
-        super().__init__(Sideright.poly,position)
+        super().__init__(Sideright2.poly,position)
         self.vx = 0
         self.vy = 0
 
 class Top2(Sprite):
-    blue = Color(0x0000CF, .5)
-    side = LineStyle(1,blue)
-    poly = RectangleAsset(8,1, side, blue)
+    red = Color(0xFF5733, 1.0)
+    side = LineStyle(1,red)
+    poly = RectangleAsset(8,1, side, red)
     def __init__(self,position):
-        super().__init__(Top.poly,position)
+        super().__init__(Top2.poly,position)
         self.vx = 0
         self.vy = 0
         
 class bottom2(Sprite):
-    blue = Color(0x0000CF, .5)
-    side = LineStyle(1,blue)
-    poly = RectangleAsset(8,1, side, blue)
+    red = Color(0xFF5733, 1.0)
+    side = LineStyle(1,red)
+    poly = RectangleAsset(8,1, side, red)
     def __init__(self,position):
-        super().__init__(bottom.poly,position)
+        super().__init__(bottom2.poly,position)
         self.vx = 0
         self.vy = 0
 
@@ -538,24 +538,24 @@ class Game(App):
                     #print("You get a gem")
                     self.text2.destroy()
                     self.gemgot2 += 1
-                    self.text=Sprite(TextAsset("GEMS:{0}".format(self.gemgot2), width=1000, align='center',style='30px Arial', fill=Color(0x2C2D5E,1)), (760,50))
+                    self.text2=Sprite(TextAsset("GEMS:{0}".format(self.gemgot2), width=1000, align='center',style='30px Arial', fill=Color(0x2C2D5E,1)), (760,50))
                     gem.destroy()
                     if self.gemgot2 == 10:
-                        self.gameover=True
+                        self.gameover = True
             
-            for a in self.getSpritesbyClass(Sideright):
+            for a in self.getSpritesbyClass(Sideright2):
                 if a.collidingWithSprites(Block):
                     sprite.x -= 1
                     sprite.vx = 0
                     a.vx = 0
                     
-            for b in self.getSpritesbyClass(Sideleft):
+            for b in self.getSpritesbyClass(Sideleft2):
                 if b.collidingWithSprites(Block):
                     sprite.x += 1
                     sprite.vx = 0
                     b.vx = 0
                    
-            for c in self.getSpritesbyClass(Top):
+            for c in self.getSpritesbyClass(Top2):
                 #print(c.collidingWithSprites(Block))
                 if c.collidingWithSprites(Block):
                     #print(c.collidingWithSprites(Block))
@@ -563,7 +563,7 @@ class Game(App):
                     sprite.vy = 0
                     c.vy = 0
             
-            for d in self.getSpritesbyClass(bottom):
+            for d in self.getSpritesbyClass(bottom2):
                 #print(d.collidingWithSprites(Block))
                 if d.collidingWithSprites(Block) == []:
                     sprite.vy += .2
@@ -579,7 +579,7 @@ class Game(App):
                         sprite.vy = 0
                         self.grounded2 = True
                 
-            for e in self.getSpritesbyClass(bottom):
+            for e in self.getSpritesbyClass(bottom2):
                 if e.collidingWithSprites(BottomSpike):
                     sprite.y += 0
                     sprite.vy = 0
@@ -588,7 +588,7 @@ class Game(App):
                     self.gameover = True
                     self.dead = True
                     
-            for f in self.getSpritesbyClass(bottom):
+            for f in self.getSpritesbyClass(bottom2):
                 if e.collidingWithSprites(Spikes):
                     sprite.y += 0
                     sprite.vy = 0
@@ -597,7 +597,7 @@ class Game(App):
                     self.gameover = True
                     self.dead = True
                     
-            for f in self.getSpritesbyClass(bottom):
+            for f in self.getSpritesbyClass(bottom2):
                 if e.collidingWithSprites(finish):
                     sprite.y += 0
                     sprite.vy = 0
@@ -633,28 +633,13 @@ class Game(App):
             if self.dead == True:
                 self.text=Sprite(TextAsset("GAME OVER :(", width=1000, align='center',style='30px Arial', fill=Color(0xff2222,1)), (760,90))
                 myapp.gameover=True
-            elif self.gemgot <= 5:
+            elif self.gemgot > self.gemgot2:
                 self.text=Sprite(TextAsset("You Ended the Game", width=1000, align='center',style='30px Arial', fill=Color(0x9A9CE5,1)), (760,90))
-                self.text=Sprite(TextAsset("Grade: F :(", width=1000, align='center',style='30px Arial', fill=Color(0xA7A8BC,1)), (760,120))
+                self.text=Sprite(TextAsset("Blue Block Wins!!", width=1000, align='center',style='30px Arial', fill=Color(0xA7A8BC,1)), (760,120))
                 myapp.gameover=True
-            elif self.gemgot == 6:
+            elif self.gemgot < self.gemgot2:
                 self.text=Sprite(TextAsset("You Ended the Game", width=1000, align='center',style='30px Arial', fill=Color(0x9A9CE5,1)), (760,90))
-                self.text=Sprite(TextAsset("Grade: D :(", width=1000, align='center',style='30px Arial', fill=Color(0xA7A8BC,1)), (760,120))
-                myapp.gameover=True
-            elif self.gemgot == 7:
-                self.text=Sprite(TextAsset("You Ended the Game", width=1000, align='center',style='30px Arial', fill=Color(0x9A9CE5,1)), (760,90))
-                self.text=Sprite(TextAsset("Grade: C :/", width=1000, align='center',style='30px Arial', fill=Color(0xA7A8BC,1)), (760,120))
-                myapp.gameover=True
-            elif self.gemgot == 8:
-                self.text=Sprite(TextAsset("You Ended the Game", width=1000, align='center',style='30px Arial', fill=Color(0x9A9CE5,1)), (760,90))
-                self.text=Sprite(TextAsset("Grade: B :/", width=1000, align='center',style='30px Arial', fill=Color(0xA7A8BC,1)), (760,120))
-                myapp.gameover=True
-            elif self.gemgot == 9:
-                self.text=Sprite(TextAsset("You Ended the Game", width=1000, align='center',style='30px Arial', fill=Color(0x9A9CE5,1)), (760,90))
-                self.text=Sprite(TextAsset("Grade: A- :)", width=1000, align='center',style='30px Arial', fill=Color(0xA7A8BC,1)), (760,120))
-                myapp.gameover=True
-            elif self.gemgot == 10:
-                self.text=Sprite(TextAsset("You Win :)", width=1000, align='center',style='30px Arial', fill=Color(0x00ff00, 1.0)), (760,90))
+                self.text=Sprite(TextAsset("Red Block Wins!!", width=1000, align='center',style='30px Arial', fill=Color(0xA7A8BC,1)), (760,120))
                 myapp.gameover=True
             
 
