@@ -14,6 +14,8 @@ print()
 print("You can end the game by running into either of the two purple blocks in the top corners.")
 print()
 print("p.s. if you're frustrated and want to cheat just comment out line 329 and  :)")
+print()
+print("Want to play alone? Use this link: https://github.com/ellaedmonds/Final-Project/blob/master/project.py")
 
 SCREEN_WIDTH = 1000
 SCREEN_HEIGHT = 800
