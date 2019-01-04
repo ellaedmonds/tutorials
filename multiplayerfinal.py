@@ -5,7 +5,7 @@
 from ggame import App, Color, LineStyle, Sprite, RectangleAsset, CircleAsset, EllipseAsset, PolygonAsset, Frame, TextAsset
 
 print("Blue Player: Use right, left and up arrows to move the player.")
-print("Red Player: Use X, C and D arrows to move the player.")
+print("Red Player: Use A, D and W arrows to move the player.")
 print()
 print("Try and collect as many gems as possible. The person with the most gems at the end wins!")
 print()
