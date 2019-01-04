@@ -201,12 +201,12 @@ class Game(App):
         Game.listenKeyEvent('keydown', 'down arrow',  self.down)
         Game.listenKeyEvent('keyup', 'down arrow',  self.downstop)
         
-        Game.listenKeyEvent('keydown', 'c',  self.right2)
-        Game.listenKeyEvent('keyup', 'c',  self.rightstop2)
-        Game.listenKeyEvent('keydown', 'x',  self.left2)
-        Game.listenKeyEvent('keyup', 'x',  self.leftstop2)
-        Game.listenKeyEvent('keydown', 'd',  self.up2)
-        Game.listenKeyEvent('keyup', 'd',  self.upstop2)
+        Game.listenKeyEvent('keydown', 'd',  self.right2)
+        Game.listenKeyEvent('keyup', 'd',  self.rightstop2)
+        Game.listenKeyEvent('keydown', 'a',  self.left2)
+        Game.listenKeyEvent('keyup', 'a',  self.leftstop2)
+        Game.listenKeyEvent('keydown', 'w',  self.up2)
+        Game.listenKeyEvent('keyup', 'w',  self.upstop2)
     
         x=0
         y=0
@@ -356,17 +356,17 @@ class Game(App):
         finish((10,10))
         finish((730,10))
         
-        Person((10,450))
-        Sideleft((10,451))
-        Sideright((20,451))
-        Top((11,450))
-        bottom((11,460))
+        Person2((10,450))
+        Sideleft2((10,451))
+        Sideright2((20,451))
+        Top2((11,450))
+        bottom2((11,460))
         
-        Person2((520,450))
-        Sideleft2((520,451))
-        Sideright2((530,451))
-        Top2((521,450))
-        bottom2((521,460))
+        Person((520,450))
+        Sideleft((520,451))
+        Sideright((530,451))
+        Top((521,450))
+        bottom((521,460))
 
         #print(self.Cells)
     
@@ -651,6 +651,7 @@ class Game(App):
                 self.text=Sprite(TextAsset("You Ended the Game", width=1000, align='center',style='30px Arial', fill=Color(0x9A9CE5,1)), (760,90))
                 self.text=Sprite(TextAsset("Red Block Wins!!", width=1000, align='center',style='30px Arial', fill=Color(0xFF5733, 1.0)), (760,120))
                 myapp.gameover=True
+            
             
 
             
